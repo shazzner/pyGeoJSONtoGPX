@@ -33,22 +33,40 @@ def main(args, loglevel):
 
       f = open( filename, 'w+' )
 
+      logging.info( "Writing GPX header" )      
       f.write( '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n' )
+      logging.debug( 'Writing: <?xml version="1.0" encoding="UTF-8" standalone="no" ?>' )
       f.write( '<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="tmber" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n' )
+      logging.debug( 'Writing: <gpx xmlns="http://www.topografix.com/GPX/1/1" creator="tmber" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">' )
       f.write( '<trk>\n' )
+      logging.debug( 'Writing: <trk>' )
       f.write( '<name>%s</name>\n' % verbose_name )
+      logging.debug( 'Writing: <name>%s</name>' % verbose_name )
+
+      caption = value[ 'properties' ][ 'Caption' ]
+      
+      f.write( '<desc>%s</desc>\n' % caption )
+      logging.debug( 'Writing: <desc>%s</desc>' % caption )
       f.write( '<trkseg>\n' )
+      logging.debug( 'Writing: <trkseg>' )
 
       coords = value[ 'geometry' ][ 'coordinates' ]
 
       for latlon in coords:
            f.write( '<trkpt lat="%s" lon="%s"></trkpt>\n' % ( latlon[1], latlon[0] ) )
+           logging.debug( 'Writing: <trkpt lat="%s" lon="%s"></trkpt>' % ( latlon[1], latlon[0] ) )
 
       f.write( '</trkseg>\n' )
+      logging.debug( 'Writing: </trkseg>' )
       f.write( '</trk>\n' )
+      logging.debug( 'Writing: </trk>' )
       f.write( '</gpx>\n' )
+      logging.debug( 'Writing: </gpx>' )
 
+      logging.info( 'Finished: %s' % filename )
 
+  logging.info( 'All done!' )
+  
 # Converts names into valid filenames      
 def slugify ( value ):
     value = str( value )
