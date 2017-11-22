@@ -36,8 +36,8 @@ def main(args, loglevel):
       logging.info( "Writing GPX header" )      
       f.write( '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n' )
       logging.debug( 'Writing: <?xml version="1.0" encoding="UTF-8" standalone="no" ?>' )
-      f.write( '<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="tmber" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n' )
-      logging.debug( 'Writing: <gpx xmlns="http://www.topografix.com/GPX/1/1" creator="tmber" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">' )
+      f.write( '<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="pyGenGPX" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n' )
+      logging.debug( 'Writing: <gpx xmlns="http://www.topografix.com/GPX/1/1" creator="pyGenGPX" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">' )
       f.write( '<trk>\n' )
       logging.debug( 'Writing: <trk>' )
       f.write( '<name>%s</name>\n' % verbose_name )
@@ -60,6 +60,9 @@ def main(args, loglevel):
       logging.debug( 'Writing: </trkseg>' )
       f.write( '</trk>\n' )
       logging.debug( 'Writing: </trk>' )
+
+      # TODO Any waypoints should go here
+      
       f.write( '</gpx>\n' )
       logging.debug( 'Writing: </gpx>' )
 
@@ -85,10 +88,6 @@ if __name__ == '__main__':
                       "url",
                       help = "url to json object",
                       metavar = "url")
-  # parser.add_argument(
-  #                     "output",
-  #                     help = "output file",
-  #                     metavar = "output")
   parser.add_argument(
                       "-v",
                       "--verbose",
